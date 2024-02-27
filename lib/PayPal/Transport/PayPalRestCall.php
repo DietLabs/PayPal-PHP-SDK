@@ -50,7 +50,7 @@ class PayPalRestCall
      * @return mixed
      * @throws \PayPal\Exception\PayPalConnectionException
      */
-    public function execute($handlers = array(), $path, $method, $data = '', $headers = array())
+    public function execute($handlers, $path, $method, $data = '', $headers = array())
     {
         $config = $this->apiContext->getConfig();
         $httpConfig = new PayPalHttpConfig(null, $method, $config);
@@ -67,6 +67,7 @@ class PayPalRestCall
         }
 
         /** @var \Paypal\Handler\IPayPalHandler $handler */
+        $handlers = $handlers ?: array();
         foreach ($handlers as $handler) {
             if (!is_object($handler)) {
                 $fullHandler = "\\" . (string)$handler;
