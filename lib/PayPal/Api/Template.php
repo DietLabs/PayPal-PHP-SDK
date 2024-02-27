@@ -227,7 +227,7 @@ class Template extends PayPalResourceModel
     {
         ArgumentValidator::validate($templateId, 'templateId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/templates/$templateId",
             "GET",
             $payLoad,
@@ -251,7 +251,7 @@ class Template extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getTemplateId(), "Id");
         $payLoad = "";
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/templates/{$this->getTemplateId()}",
             "DELETE",
             $payLoad,
@@ -271,7 +271,7 @@ class Template extends PayPalResourceModel
      */
     public function create($apiContext = null, $restCall = null)
     {
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/templates",
             "POST",
             $this->toJSON(),
@@ -294,7 +294,7 @@ class Template extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getTemplateId(), "Id");
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/templates/{$this->getTemplateId()}",
             "PUT",
             $payLoad,

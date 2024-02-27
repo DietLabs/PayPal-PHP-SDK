@@ -380,7 +380,7 @@ class Agreement extends PayPalResourceModel
     public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/",
             "POST",
             $payLoad,
@@ -404,7 +404,7 @@ class Agreement extends PayPalResourceModel
     {
         ArgumentValidator::validate($paymentToken, 'paymentToken');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/$paymentToken/agreement-execute",
             "POST",
             $payLoad,
@@ -428,7 +428,7 @@ class Agreement extends PayPalResourceModel
     {
         ArgumentValidator::validate($agreementId, 'agreementId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/$agreementId",
             "GET",
             $payLoad,
@@ -454,7 +454,7 @@ class Agreement extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/{$this->getId()}",
             "PATCH",
             $payLoad,
@@ -478,7 +478,7 @@ class Agreement extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/{$this->getId()}/suspend",
             "POST",
             $payLoad,
@@ -502,7 +502,7 @@ class Agreement extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/{$this->getId()}/re-activate",
             "POST",
             $payLoad,
@@ -526,7 +526,7 @@ class Agreement extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/{$this->getId()}/cancel",
             "POST",
             $payLoad,
@@ -550,7 +550,7 @@ class Agreement extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/{$this->getId()}/bill-balance",
             "POST",
             $payLoad,
@@ -574,7 +574,7 @@ class Agreement extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($currency, 'currency');
         $payLoad = $currency->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/{$this->getId()}/set-balance",
             "POST",
             $payLoad,
@@ -598,7 +598,7 @@ class Agreement extends PayPalResourceModel
     {
         ArgumentValidator::validate($agreementId, 'agreementId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/$agreementId/transactions",
             "GET",
             $payLoad,
@@ -631,7 +631,7 @@ class Agreement extends PayPalResourceModel
         );
 
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-agreements/$agreementId/transactions?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,

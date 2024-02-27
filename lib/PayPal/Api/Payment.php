@@ -567,7 +567,7 @@ class Payment extends PayPalResourceModel
     public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payment",
             "POST",
             $payLoad,
@@ -591,7 +591,7 @@ class Payment extends PayPalResourceModel
     {
         ArgumentValidator::validate($paymentId, 'paymentId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payment/$paymentId",
             "GET",
             $payLoad,
@@ -617,7 +617,7 @@ class Payment extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/payment/{$this->getId()}",
             "PATCH",
             $payLoad,
@@ -641,7 +641,7 @@ class Payment extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($paymentExecution, 'paymentExecution');
         $payLoad = $paymentExecution->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payment/{$this->getId()}/execute",
             "POST",
             $payLoad,
@@ -675,7 +675,7 @@ class Payment extends PayPalResourceModel
                     'sort_by' => 1,
                     'sort_order' => 1,
         );
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payment?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,

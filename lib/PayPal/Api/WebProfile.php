@@ -171,7 +171,7 @@ class WebProfile extends PayPalResourceModel
     public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payment-experience/web-profiles/",
             "POST",
             $payLoad,
@@ -195,7 +195,7 @@ class WebProfile extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = $this->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payment-experience/web-profiles/{$this->getId()}",
             "PUT",
             $payLoad,
@@ -223,7 +223,7 @@ class WebProfile extends PayPalResourceModel
             $payload[] = $patchObject->toArray();
         }
         $payLoad = json_encode($payload);
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payment-experience/web-profiles/{$this->getId()}",
             "PATCH",
             $payLoad,
@@ -246,7 +246,7 @@ class WebProfile extends PayPalResourceModel
     {
         ArgumentValidator::validate($profileId, 'profileId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payment-experience/web-profiles/$profileId",
             "GET",
             $payLoad,
@@ -269,7 +269,7 @@ class WebProfile extends PayPalResourceModel
     public static function get_list($apiContext = null, $restCall = null)
     {
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payment-experience/web-profiles/",
             "GET",
             $payLoad,
@@ -291,7 +291,7 @@ class WebProfile extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payment-experience/web-profiles/{$this->getId()}",
             "DELETE",
             $payLoad,

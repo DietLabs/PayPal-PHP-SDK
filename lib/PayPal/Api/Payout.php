@@ -112,7 +112,7 @@ class Payout extends PayPalResourceModel
         $allowedParams = array(
             'sync_mode' => 1,
         );
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payouts" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "POST",
             $payLoad,
@@ -150,7 +150,7 @@ class Payout extends PayPalResourceModel
     {
         ArgumentValidator::validate($payoutBatchId, 'payoutBatchId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payouts/$payoutBatchId",
             "GET",
             $payLoad,

@@ -30,7 +30,7 @@ class FuturePayment extends Payment
             );
         }
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payment",
             "POST",
             $payLoad,

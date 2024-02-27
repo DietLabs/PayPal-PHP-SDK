@@ -174,7 +174,7 @@ class PaymentInstruction extends PayPalResourceModel
     {
         ArgumentValidator::validate($paymentId, 'paymentId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payment/$paymentId/payment-instruction",
             "GET",
             $payLoad,

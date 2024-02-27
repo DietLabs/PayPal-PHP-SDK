@@ -319,7 +319,7 @@ class Refund extends PayPalResourceModel
     {
         ArgumentValidator::validate($refundId, 'refundId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/refund/$refundId",
             "GET",
             $payLoad,

@@ -272,7 +272,7 @@ class Capture extends PayPalResourceModel
     {
         ArgumentValidator::validate($captureId, 'captureId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/capture/$captureId",
             "GET",
             $payLoad,
@@ -299,7 +299,7 @@ class Capture extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($refund, 'refund');
         $payLoad = $refund->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/capture/{$this->getId()}/refund",
             "POST",
             $payLoad,
@@ -325,7 +325,7 @@ class Capture extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($refundRequest, 'refundRequest');
         $payLoad = $refundRequest->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/capture/{$this->getId()}/refund",
             "POST",
             $payLoad,

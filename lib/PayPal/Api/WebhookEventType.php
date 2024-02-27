@@ -101,7 +101,7 @@ class WebhookEventType extends PayPalResourceModel
     {
         ArgumentValidator::validate($webhookId, 'webhookId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks/$webhookId/event-types",
             "GET",
             $payLoad,
@@ -124,7 +124,7 @@ class WebhookEventType extends PayPalResourceModel
     public static function availableEventTypes($apiContext = null, $restCall = null)
     {
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks-event-types",
             "GET",
             $payLoad,

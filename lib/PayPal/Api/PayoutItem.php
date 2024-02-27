@@ -149,7 +149,7 @@ class PayoutItem extends PayPalResourceModel
     {
         ArgumentValidator::validate($payoutItemId, 'payoutItemId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payouts-item/$payoutItemId",
             "GET",
             $payLoad,
@@ -174,7 +174,7 @@ class PayoutItem extends PayPalResourceModel
     {
         ArgumentValidator::validate($payoutItemId, 'payoutItemId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/payouts-item/$payoutItemId/cancel",
             "POST",
             $payLoad,

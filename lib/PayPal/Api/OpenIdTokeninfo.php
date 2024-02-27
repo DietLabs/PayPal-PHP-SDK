@@ -191,7 +191,7 @@ class OpenIdTokeninfo extends PayPalResourceModel
         $clientId = $clientId ? $clientId : $apiContext->getCredential()->getClientId();
         $clientSecret = $clientSecret ? $clientSecret : $apiContext->getCredential()->getClientSecret();
 
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/identity/openidconnect/tokenservice",
             "POST",
             http_build_query(array_intersect_key($params, $allowedParams)),
@@ -237,7 +237,7 @@ class OpenIdTokeninfo extends PayPalResourceModel
         $clientId = isset($params['client_id']) ? $params['client_id'] : $apiContext->getCredential()->getClientId();
         $clientSecret = isset($params['client_secret']) ? $params['client_secret'] : $apiContext->getCredential()->getClientSecret();
 
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/identity/openidconnect/tokenservice",
             "POST",
             http_build_query(array_intersect_key($params, $allowedParams)),

@@ -977,7 +977,7 @@ class Invoice extends PayPalResourceModel
     public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices",
             "POST",
             $payLoad,
@@ -1001,7 +1001,7 @@ class Invoice extends PayPalResourceModel
     {
         ArgumentValidator::validate($search, 'search');
         $payLoad = $search->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/search",
             "POST",
             $payLoad,
@@ -1025,7 +1025,7 @@ class Invoice extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}/send",
             "POST",
             $payLoad,
@@ -1049,7 +1049,7 @@ class Invoice extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($notification, 'notification');
         $payLoad = $notification->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}/remind",
             "POST",
             $payLoad,
@@ -1073,7 +1073,7 @@ class Invoice extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($cancelNotification, 'cancelNotification');
         $payLoad = $cancelNotification->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}/cancel",
             "POST",
             $payLoad,
@@ -1097,7 +1097,7 @@ class Invoice extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($paymentDetail, 'paymentDetail');
         $payLoad = $paymentDetail->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}/record-payment",
             "POST",
             $payLoad,
@@ -1121,7 +1121,7 @@ class Invoice extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($refundDetail, 'refundDetail');
         $payLoad = $refundDetail->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}/record-refund",
             "POST",
             $payLoad,
@@ -1144,7 +1144,7 @@ class Invoice extends PayPalResourceModel
     {
         ArgumentValidator::validate($invoiceId, 'invoiceId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/$invoiceId",
             "GET",
             $payLoad,
@@ -1176,7 +1176,7 @@ class Invoice extends PayPalResourceModel
         );
 
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
@@ -1200,7 +1200,7 @@ class Invoice extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}",
             "PUT",
             $payLoad,
@@ -1223,7 +1223,7 @@ class Invoice extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}",
             "DELETE",
             $payLoad,
@@ -1246,7 +1246,7 @@ class Invoice extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($transactionId, "TransactionId");
         $payLoad = "";
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}/payment-records/{$transactionId}",
             "DELETE",
             $payLoad,
@@ -1269,7 +1269,7 @@ class Invoice extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($transactionId, "TransactionId");
         $payLoad = "";
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/{$this->getId()}/refund-records/{$transactionId}",
             "DELETE",
             $payLoad,
@@ -1301,7 +1301,7 @@ class Invoice extends PayPalResourceModel
         );
 
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/$invoiceId/qr-code?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
@@ -1324,7 +1324,7 @@ class Invoice extends PayPalResourceModel
     public static function generateNumber($apiContext = null, $restCall = null)
     {
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/invoices/next-invoice-number",
             "POST",
             $payLoad,

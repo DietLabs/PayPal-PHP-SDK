@@ -131,7 +131,7 @@ class Webhook extends PayPalResourceModel
     public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks",
             "POST",
             $payLoad,
@@ -155,7 +155,7 @@ class Webhook extends PayPalResourceModel
     {
         ArgumentValidator::validate($webhookId, 'webhookId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks/$webhookId",
             "GET",
             $payLoad,
@@ -197,7 +197,7 @@ class Webhook extends PayPalResourceModel
         $allowedParams = array(
             'anchor_type' => 1,
         );
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
@@ -223,7 +223,7 @@ class Webhook extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks/{$this->getId()}",
             "PATCH",
             $payLoad,
@@ -246,7 +246,7 @@ class Webhook extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks/{$this->getId()}",
             "DELETE",
             $payLoad,

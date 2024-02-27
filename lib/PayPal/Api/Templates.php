@@ -249,7 +249,7 @@ class Templates extends PayPalResourceModel
     {
         ArgumentValidator::validate($templateId, 'templateId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/templates/$templateId",
             "GET",
             $payLoad,
@@ -277,7 +277,7 @@ class Templates extends PayPalResourceModel
         $allowedParams = array(
           'fields' => 1,
       );
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/invoicing/templates/" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,

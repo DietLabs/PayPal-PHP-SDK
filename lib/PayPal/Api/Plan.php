@@ -330,7 +330,7 @@ class Plan extends PayPalResourceModel
     {
         ArgumentValidator::validate($planId, 'planId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-plans/$planId",
             "GET",
             $payLoad,
@@ -353,7 +353,7 @@ class Plan extends PayPalResourceModel
     public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-plans/",
             "POST",
             $payLoad,
@@ -378,7 +378,7 @@ class Plan extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
-        self::executeCall(
+        call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-plans/{$this->getId()}",
             "PATCH",
             $payLoad,
@@ -429,7 +429,7 @@ class Plan extends PayPalResourceModel
             'page' => 1,
             'total_required' => 1
         );
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/billing-plans/" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,

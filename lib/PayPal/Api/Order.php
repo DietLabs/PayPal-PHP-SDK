@@ -373,7 +373,7 @@ class Order extends PayPalResourceModel
     {
         ArgumentValidator::validate($orderId, 'orderId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/orders/$orderId",
             "GET",
             $payLoad,
@@ -399,7 +399,7 @@ class Order extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($capture, 'capture');
         $payLoad = $capture->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/orders/{$this->getId()}/capture",
             "POST",
             $payLoad,
@@ -423,7 +423,7 @@ class Order extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/orders/{$this->getId()}/do-void",
             "POST",
             $payLoad,
@@ -448,7 +448,7 @@ class Order extends PayPalResourceModel
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($authorization, 'Authorization');
         $payLoad = $authorization->toJSON();
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/payments/orders/{$this->getId()}/authorize",
             "POST",
             $payLoad,

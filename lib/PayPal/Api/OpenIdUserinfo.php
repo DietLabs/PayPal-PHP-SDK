@@ -520,7 +520,7 @@ class OpenIdUserinfo extends PayPalResourceModel
         $requestUrl = "/v1/identity/openidconnect/userinfo?"
             . http_build_query(array_intersect_key($params, $allowedParams));
 
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             $requestUrl,
             "GET",
             "",

@@ -241,7 +241,7 @@ class WebhookEvent extends PayPalResourceModel
     {
         ArgumentValidator::validate($eventId, 'eventId');
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks-events/$eventId",
             "GET",
             $payLoad,
@@ -265,7 +265,7 @@ class WebhookEvent extends PayPalResourceModel
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks-events/{$this->getId()}/resend",
             "POST",
             $payLoad,
@@ -296,7 +296,7 @@ class WebhookEvent extends PayPalResourceModel
           'transaction_id' => 1,
           'event_type' => 1,
       );
-        $json = self::executeCall(
+        $json = call_user_func(self::class . '::executeCall',
             "/v1/notifications/webhooks-events" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
